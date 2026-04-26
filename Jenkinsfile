@@ -45,6 +45,14 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
+            when {
+                beforeInput true
+                expression { return false } // Skip in CI – deploy manually via: kubectl apply -f k8s/taska-app.yaml
+            }
+            input {
+                message 'Deploy to Kubernetes?'
+                ok 'Deploy'
+            }
             steps {
                 echo '🚀 Deploying to Kubernetes...'
                 sh """
