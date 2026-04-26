@@ -1,0 +1,77 @@
+# ============================================
+#  Taska – Combined Kubernetes Manifest
+#  All-in-one file for quick Minikube deploys
+# ============================================
+
+---
+# --- Namespace (optional, keeps things organized) ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: taska
+
+---
+# --- Deployment ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taska-deployment
+  namespace: taska
+  labels:
+    app: taska
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: taska
+  template:
+    metadata:
+      labels:
+        app: taska
+    spec:
+      containers:
+        - name: taska
+          image: sriharsshun/taska:latest
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            timeoutSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 10
+            timeoutSeconds: 3
+
+---
+# --- Service (NodePort for Minikube) ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: taska-service
+  namespace: taska
+  labels:
+    app: taska
+spec:
+  type: NodePort
+  selector:
+    app: taska
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30000

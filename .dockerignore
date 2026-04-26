@@ -1,0 +1,23 @@
+# Version control
+.git
+.gitignore
+
+# Docker files (avoid recursive copies)
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# IDE / Editor
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Documentation
+README.md
+LICENSE
+*.md

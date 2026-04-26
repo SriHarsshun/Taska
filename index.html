@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Taska – A beautifully designed to-do application to organize your tasks with style.">
+    <title>Taska – Smart Task Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Background Orbs -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header" id="app-header">
+            <div class="header-left">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
+                        <rect x="2" y="2" width="28" height="28" rx="8" fill="url(#logo-grad)"/>
+                        <path d="M10 16L14 20L22 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="logo-grad" x1="2" y1="2" x2="30" y2="30">
+                                <stop stop-color="#6C5CE7"/>
+                                <stop offset="1" stop-color="#a855f7"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <h1 class="logo-text">Taska</h1>
+                </div>
+                <p class="header-subtitle">Organize your day, beautifully.</p>
+            </div>
+            <div class="header-right">
+                <div class="stats-pill" id="stats-pill">
+                    <span class="stats-done" id="stats-done">0</span>
+                    <span class="stats-sep">/</span>
+                    <span class="stats-total" id="stats-total">0</span>
+                    <span class="stats-label">done</span>
+                </div>
+                <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-section" id="progress-section">
+            <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="progress-bar-fill"></div>
+            </div>
+            <span class="progress-text" id="progress-text">0% complete</span>
+        </div>
+
+        <!-- Add Task Section -->
+        <div class="add-task-section" id="add-task-section">
+            <form class="add-task-form" id="add-task-form">
+                <div class="input-wrapper">
+                    <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="16"/>
+                        <line x1="8" y1="12" x2="16" y2="12"/>
+                    </svg>
+                    <input type="text" id="task-input" class="task-input" placeholder="What needs to be done?" autocomplete="off" maxlength="200">
+                </div>
+                <div class="add-task-options">
+                    <div class="priority-selector" id="priority-selector">
+                        <button type="button" class="priority-btn active" data-priority="low" title="Low priority">
+                            <span class="priority-dot low"></span>Low
+                        </button>
+                        <button type="button" class="priority-btn" data-priority="medium" title="Medium priority">
+                            <span class="priority-dot medium"></span>Med
+                        </button>
+                        <button type="button" class="priority-btn" data-priority="high" title="High priority">
+                            <span class="priority-dot high"></span>High
+                        </button>
+                    </div>
+                    <div class="category-selector">
+                        <select id="category-select" class="category-select">
+                            <option value="personal">🏠 Personal</option>
+                            <option value="work">💼 Work</option>
+                            <option value="study">📚 Study</option>
+                            <option value="health">💪 Health</option>
+                            <option value="shopping">🛒 Shopping</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="add-btn" id="add-btn" title="Add task">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Add
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section" id="filters-section">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all" id="filter-all">All</button>
+                <button class="filter-tab" data-filter="active" id="filter-active">Active</button>
+                <button class="filter-tab" data-filter="completed" id="filter-completed">Completed</button>
+            </div>
+            <div class="filter-actions">
+                <button class="clear-completed-btn" id="clear-completed-btn" title="Clear completed tasks">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                    Clear Done
+                </button>
+            </div>
+        </div>
+
+        <!-- Task List -->
+        <div class="task-list-container" id="task-list-container">
+            <ul class="task-list" id="task-list">
+                <!-- Tasks rendered dynamically -->
+            </ul>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="empty-state">
+                <div class="empty-illustration">
+                    <svg viewBox="0 0 120 120" fill="none">
+                        <circle cx="60" cy="60" r="50" fill="url(#empty-bg)" opacity="0.15"/>
+                        <path d="M45 55 L55 65 L75 45" stroke="url(#empty-check)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+                        <rect x="35" y="75" width="50" height="4" rx="2" fill="currentColor" opacity="0.08"/>
+                        <rect x="40" y="82" width="40" height="4" rx="2" fill="currentColor" opacity="0.05"/>
+                        <defs>
+                            <linearGradient id="empty-bg" x1="10" y1="10" x2="110" y2="110">
+                                <stop stop-color="#6C5CE7"/>
+                                <stop offset="1" stop-color="#a855f7"/>
+                            </linearGradient>
+                            <linearGradient id="empty-check" x1="45" y1="45" x2="75" y2="65">
+                                <stop stop-color="#6C5CE7"/>
+                                <stop offset="1" stop-color="#a855f7"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h3 class="empty-title" id="empty-title">No tasks yet</h3>
+                <p class="empty-text" id="empty-text">Add your first task above to get started!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
